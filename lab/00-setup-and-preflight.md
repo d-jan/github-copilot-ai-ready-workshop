@@ -25,7 +25,7 @@
 このリポジトリの概要を教えて
 ```
 
-![Quick Chat でリポジトリを選択する画面](./images/00-select-chat-repository.png)
+![Quick Chat でリポジトリを選択する画面](./images/00-quick-chat-prompt.png)
 
 > [!TIP]
 > Chats はブランチやワークツリーを作成することなく、質問やブレーンストーミングを行うことが可能。
