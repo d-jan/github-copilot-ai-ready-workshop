@@ -1,6 +1,15 @@
 {
   "version": 1,
   "hooks": {
+    "preToolUse": [
+      {
+        "type": "command",
+        "matcher": "view|grep|rg|glob|bash|powershell|task|web_fetch|web_search",
+        "bash": "node .github/hooks/scripts/lab-access-guard.mjs",
+        "powershell": "node .github/hooks/scripts/lab-access-guard.mjs",
+        "timeoutSec": 10
+      }
+    ],
     "postToolUse": [
       {
         "type": "command",
