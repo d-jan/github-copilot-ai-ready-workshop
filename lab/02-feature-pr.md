@@ -1,58 +1,38 @@
-# Lab 02: Feature PR で main へ反映する
+# Lab 02: PR を作成し、main へ反映する
 
-**テーマ:** コミットと Draft Pull Request の証跡を人が確認する Human-in-the-loop
+**テーマ:** Main へのマージに機械的な品質ゲートと人の確認フローを組みこむ。
 
 ## シナリオ
 
-Lab 01 の変更をコミットし、GitHub Copilot App の **Create draft PR** から
-workshop fork の `main` に向けた Draft Pull Request を作成する。
-AI が提案したコミットメッセージと、App UI が生成した Pull Request のタイトル・本文を
-人が確認する。ローカルで働いた依存ガードレールを、サーバー側の CI でも再確認する。
+- GitHub Copilot App では PR の自動作成や Auto マージが可能だが、認識負債・齟齬を考慮して、本ラボではこれらは実施しない。
+- エージェントにはドラフト案だけを作成させ、PR タイトル・本文をを人が確認する手順を踏む。
+- 依存ガードレールやテスト、型チェック・ビルド検証といったゲートを、サーバー側の CI に組み込むことで、機械的に品質を担保する。
 
 ## 前提条件
 
-- Lab 01 の実装と検証が完了していること。
-- `git-workflow` がコミットメッセージ案を提示し、承認を待っていること。
+- Lab 01 の実装・検証とコミットが完了していること。
+- GitHub Actions が利用できる。
 
 ## 手順
 
-### 1. コミットメッセージ案を確認する
+### 1. Create draft PR でタイトルと本文を確認する
 
-Lab 01 の最後に表示されたメッセージ案が、実際の変更と目的を説明できているか確認する。
+コミット完了後、GitHub Copilot App UI の **Create draft PR** を選ぶ。
 
-- 変更内容が具体的か。
-- 変更していない内容を含んでいないか。
-- 後から履歴を読む人が目的を理解できるか。
+Draft PR が作成されたら、github.com から [Pull Requests] の内容を確認する。
 
-必要に応じて `メッセージを修正` を選び、案を更新する。
-内容に合意したら `このメッセージでコミット` を選ぶ。
+- base リポジトリが upstream ではなく、自身のフォークリポジトリであることを確認する。
+- base ブランチが `main` であることを確認する。
+- タイトルが本実装とマッチしているか、本文に背景や変更内容等が含まれているか確認する。
+- CI が自動で走り、正常に完了しているかを確認する。
+- コンフリクトが発生していないか確認する。
 
-**期待する結果:**
+### 2. copilot にレビューを依頼する
 
-- 人が承認するまでコミットされない。
-- 承認した日本語メッセージでコミットが作成される。
-- `git-workflow` はコミット結果を報告して終了し、push や Pull Request 作成は行わない。
+**View session** から
+レビュー完了後
 
-### 2. Create draft PR でタイトルと本文を確認する
-
-コミット完了後、Copilot App UI の **Create draft PR** を選ぶ。
-
-1. base リポジトリが upstream ではなく、自分の workshop fork であることを確認する。
-2. base ブランチが `main` であることを確認する。
-3. App UI が生成したタイトルから変更の目的が分かるか確認する。
-4. 本文に変更概要、検証結果、追加依存と ADR、レビュー時の確認ポイントが
-   含まれているか確認する。
-5. 必要に応じてタイトルと本文を修正する。
-6. Draft Pull Request を作成する。
-
-**期待する結果:**
-
-- 作業ブランチの変更から Draft Pull Request が作成される。
-- `main` へ直接 push されない。
-- 人が確認したタイトルと本文が Draft Pull Request に残る。
-- CI（`npm ci` / `npm test` / `npm run build`）が自動で走る。
-
-### 3. CI を確認して main へマージする
+### 3. main へマージする
 
 Draft Pull Request の CI がすべて成功していることを確認する。
 
@@ -67,12 +47,7 @@ CI と Draft Pull Request の内容を確認したら Ready for review に変更
 その後、**Copilot App の UI** 上の「Merge pull request」ボタンを押して
 自分の workshop fork の `main` へマージする。
 
-**期待する結果:**
-
-- CI がすべて成功している。
-- `main` へ直接 push せず、Pull Request を通じて変更が反映される。
-
-## 期待する結果 / 残る成果物
+## 期待する結果
 
 - 人が確認したコミットメッセージ。
 - 人が確認したタイトルと本文を持つ Feature PR。
