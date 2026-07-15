@@ -80,12 +80,11 @@ npm view react-router-dom version engines peerDependencies --json
 
 ![Branch prefix override に feature/ を設定する画面](./images/00-branch-prefix-override.png)
 
-この設定をしておくと、次の手順 6 で作成するワークツリーのブランチ名に `feature/` が自動で付与され、
-GitHub Flow に沿った「feature ブランチ → Pull Request → `main`」の運用をデモできる。
+この設定をしておくと、次の手順 6 で作成するワークツリーのブランチ名に `feature/` が自動で付与され、チームの GitHub Flow に沿った運用ができる。
 
 ### 6. 新しいワークツリーを作成し、自動でパッケージがインストールされたことを確認する。
 
-プロジェクトから新しいセッションを作成し、**New worktree** を選ぶ。プロンプトを実行して初めて新しいワークスペースが作成されるため、以下 Shell コマンドを実行する。
+プロジェクトから新しいセッションを作成し、**New worktree** を選ぶ。プロンプトを実行して初めて新しいワークスペースが作成されるため、以下 Shell コマンドを実行する。併せてブランチ名を確認する。
 
 ```shell
 git status
@@ -99,8 +98,6 @@ git status
 > - ワークツリーのメリットを享受できる。
 > - Setup スクリプトで初回に毎度 `npm ci` が実行されるため、すべてのワークツリーで `package-lock.json` に準拠した依存関係バージョンが使用できる。
 > - セッションごとに `feature/` プレフィックスの付いた短命な作業ブランチが自動生成される。
->   実装を始める Lab で `feature/` に続く部分を作業項目が分かる名前へリネームし、
->   `main` への反映は Pull Request で行う（GitHub Flow）。
 
 ### 7. Run と Canvas を確認する
 
@@ -108,15 +105,15 @@ git status
 
 ![Browser Canvas に表示された Outdoor eShop](./images/00-run-browser-canvas.png)
 
-## 期待する結果 / 残る成果物
+## 期待する結果
 
 - Fork したリポジトリがプロジェクトに追加されている。
-- Setup スクリプトで依存がインストールされている。
-- Branch prefix override に `feature/` が設定されている。
-- New worktree のセッションが作成され、起動している。
-- `main` とは別の、`feature/` プレフィックスが付いた自動生成の作業ブランチ上にいる。
-- セッション上の shell コマンドで worktree の状態と npm レジストリへの疎通が確認できている。
-- Run でアプリが起動し、Canvas で表示できる。
+- Quick Chat が応答を返す。
+- GitHub Copilot App から shell コマンドが実行できる。
+- ワークツリーが `C:\Users\xxx\.copilot\repos\copilot-worktrees\github-copilot-ai-ready-workshop\feature-xxx` に作成され、新しいセッションが立ち上がっている。
+- ワークツリーでは `main` とは別の、`feature/` プレフィックスが付いた自動生成の作業ブランチ上にいる。
+- Setup スクリプトで新しく作成されたワークツリー環境に依存がインストールされている。
+- Run で正常にアプリが立ち上がりし、Browser Canvas タブで Web UI が確認できる。
 
 > うまくいかない場合は [講師ガイド](./instructor-guide.md#lab-00-復旧) を参照。
 
