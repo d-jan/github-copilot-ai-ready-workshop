@@ -70,7 +70,12 @@ npm view react-router-dom version engines peerDependencies --json
 
 ![Setup スクリプトに npm ci を設定する画面](./images/00-setup-script-npm-ci.png)
 
-この設定をしておくと、新しいワークスペース作成時に `package-lock.json` どおりの依存がインストールされる。
+この設定をしておくと、新しいワークスペース作成時に `package-lock.json` 通りの依存がインストールされる。
+
+> [!Note]
+> Triggers を設定しない場合は、手動で Setup スクリプトコマンドを実行することができる。
+> 
+> ![手動で Setup スクリプトを実行する](./images/00-setup-script-note.png)
 
 ### 5. ブランチのプレフィックスを設定して GitHub Flow に沿った命名にする
 
