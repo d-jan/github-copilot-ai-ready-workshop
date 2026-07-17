@@ -1,11 +1,13 @@
 import { useMemo, useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import { Header } from './components/Header';
 import { SearchBar } from './components/SearchBar';
 import { ProductGrid } from './components/ProductGrid';
+import { ProductDetail } from './components/ProductDetail';
 import { products } from './data/products';
 import { searchProducts } from './lib/search';
 
-export default function App() {
+function ProductListPage() {
   const [query, setQuery] = useState('');
 
   const visibleProducts = useMemo(
@@ -14,9 +16,7 @@ export default function App() {
   );
 
   return (
-    <div className="app">
-      <Header productCount={products.length} />
-
+    <>
       <main className="main">
         <div className="main__intro">
           <h2 className="main__heading">おすすめのアウトドア用品</h2>
@@ -31,6 +31,19 @@ export default function App() {
 
         <ProductGrid products={visibleProducts} />
       </main>
+    </>
+  );
+}
+
+export default function App() {
+  return (
+    <div className="app">
+      <Header productCount={products.length} />
+
+      <Routes>
+        <Route path="/" element={<ProductListPage />} />
+        <Route path="/product/:id" element={<ProductDetail />} />
+      </Routes>
 
       <footer className="footer">
         <p>Outdoor eShop — GitHub Copilot ワークショップ用サンプル</p>
